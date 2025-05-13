@@ -20,7 +20,7 @@ WORKDIR /src
 EXPOSE 8080
 
 # Copia el JAR generado
-COPY --from=build /target/*.jar app.jar
+COPY --from=build target/*.jar app.jar
 
 # Establece el comando para ejecutar el JAR
 ENTRYPOINT ["java", "-jar", "app.jar"]
