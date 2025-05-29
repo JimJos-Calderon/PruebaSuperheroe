@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Random Dota 2 Hero</title>
+    <style>
+        .hero-card {
+            font-family: 'Arial', sans-serif;
+            width: 300px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            margin: 20px auto;
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+            color: white;
+        }
+        
+        .hero-header {
+            background-color: #0f3460;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        .hero-name {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        
+        .hero-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background-color: #0f3460;
+        }
+        
+        .hero-details {
+            padding: 15px;
+        }
+        
+        .hero-attribute {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+        }
+        
+        .attribute-label {
+            font-weight: bold;
+            color: #e94560;
+        }
+        
+        .refresh-btn {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #e94560;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s;
+        }
+        
+        .refresh-btn:hover {
+            background-color: #d13454;
+        }
+    </style>
+</head>
+<body>
+    <div class="hero-card">
+        <div class="hero-header">
+            <h1 class="hero-name" th:text="${hero.localized_name}">Hero Name</h1>
+        </div>
+        
+        <img class="hero-image" 
+             th:src="'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/' + ${hero.name.replace('npc_dota_hero_', '')} + '.png'" 
+             alt="Hero Image"
+             onerror="this.src='https://via.placeholder.com/300x200?text=Hero+Image'">
+        
+        <div class="hero-details">
+            <div class="hero-attribute">
+                <span class="attribute-label">Primary Attribute:</span>
+                <span th:text="${hero.primary_attr}">Attribute</span>
+            </div>
+            
+            <div class="hero-attribute">
+                <span class="attribute-label">Attack Type:</span>
+                <span th:text="${hero.attack_type}">Type</span>
+            </div>
+            
+            <div class="hero-attribute">
+                <span class="attribute-label">Roles:</span>
+                <span th:text="${#strings.arrayJoin(hero.roles, ', ')}">Roles</span>
+            </div>
+            
+            <div class="hero-attribute">
+                <span class="attribute-label">Legs:</span>
+                <span th:text="${hero.legs}">2</span>
+            </div>
+        </div>
+        
+        <button class="refresh-btn" onclick="window.location.reload()">Get Another Hero</button>
+    </div>
+</body>
+</html>

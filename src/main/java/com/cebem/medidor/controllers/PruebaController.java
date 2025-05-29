@@ -28,7 +28,7 @@ import com.cebem.medidor.services.RickandmortyService;
 public class PruebaController {
     
 
-    @GetMapping("/")
+    @GetMapping("/a")
     public String saluda(){
         return "Hola desde el backend!";
     }
