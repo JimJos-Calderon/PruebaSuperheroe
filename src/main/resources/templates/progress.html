@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <style>
+        .hero-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+            gap: 10px;
+        }
+        .hero-card {
+            border: 2px solid #e94560;
+            border-radius: 8px;
+            padding: 5px;
+            text-align: center;
+        }
+        .guessed {
+            background-color: #4caf5050; /* Verde transparente */
+        }
+        .missing {
+            background-color: #e9456050; /* Rojo transparente */
+        }
+    </style>
+</head>
+<body>
+    <h1>Tu Progreso</h1>
+    
+    <h2>Adivinados: <span th:text="${guessedHeroes.size()}"></span>/<span th:text="${guessedHeroes.size() + missingHeroes.size()}"></span></h2>
+    <div class="hero-grid">
+        <div th:each="hero : ${guessedHeroes}" class="hero-card guessed">
+            <img th:src="'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/' + ${hero.name.replace('npc_dota_hero_', '')} + '.png'" 
+                 width="80">
+            <div th:text="${hero.localized_name}"></div>
+        </div>
+    </div>
+
+    <h2>Faltantes:</h2>
+    <div class="hero-grid">
+        <div th:each="hero : ${missingHeroes}" class="hero-card missing">
+            <img th:src="'https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/' + ${hero.name.replace('npc_dota_hero_', '')} + '.png'" 
+                 width="80" style="filter: brightness(0.5);">
+            <div th:text="${hero.localized_name}" style="color: #777"></div>
+        </div>
+    </div>
+</body>
+</html>

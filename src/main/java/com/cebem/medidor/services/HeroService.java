@@ -1,7 +1,9 @@
 package com.cebem.medidor.services;
+
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 
-// HeroService.java - Servicio para obtener datos de la API
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -25,5 +27,13 @@ public class HeroService {
         }
         
         return heroes[random.nextInt(heroes.length)];
+    }
+
+    public List<Hero> getAllHeroes() {
+        Hero[] heroes = restTemplate.getForObject(
+            "https://api.opendota.com/api/heroes", 
+            Hero[].class
+        );
+        return Arrays.asList(heroes != null ? heroes : new Hero[0]);
     }
 }

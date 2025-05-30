@@ -19,7 +19,7 @@ public class GiphyController {
         this.giphyService = giphyService;
     }
     
-    @GetMapping("/")
+    @GetMapping("/gifs")
     public String home(Model model) {
         GiphyResponse trendingGifs = giphyService.getTrendingGifs(12);
         model.addAttribute("gifs", trendingGifs.getData());
